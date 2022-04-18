@@ -1,0 +1,56 @@
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        schema_update:
+          unique_constraint_strategy: RECREATE_QUIETLY
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update        
+    open-in-view: false
+  datasource:
+    driver-class-name: org.${USERNAME}ql.Driver
+    url: jdbc:${USERNAME}ql://${DB_HOST}/ingresos
+    username: ${USERNAME}
+    password: ${PASSWORD}
+  mail:
+    default-encoding: UTF-8
+    host: ${HOST_MAIL}
+    username: ${USERNAME_MAIL}
+    password: ${PASSWORD_MAIL}
+    port: 25
+    properties:
+      mail:
+        ssl:
+          enable: true
+        smtp:
+          auth: true
+          starttls:
+            enable: true       
+            required: true     
+    protocol: smtp
+    test-connection: false
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+  signing-key: ${SIGNIN_KEY}
+  encoding-strength: 256
+  security-realm: Spring Boot JWT
+  jwt:
+    client-id: ingresoVisitantes
+    client-secret: ${PASSWORD_MAIL}${CLIENT_SECRET}
+    grant-type: password
+    scope-read: read
+    scope-write: write
+    resource-ids: ${RESOURCE_ID}
