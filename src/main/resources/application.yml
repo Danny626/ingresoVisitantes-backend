@@ -1,3 +1,8 @@
+server:
+  port: ${SERVER_PORT}
+  address: ${SERVER_ADDRESS}
+  servlet:
+    context-path: /ingresoVisitantes
 spring:
   output:
     ansi:
@@ -19,8 +24,8 @@ spring:
       ddl-auto: update        
     open-in-view: false
   datasource:
-    driver-class-name: org.${USERNAME}ql.Driver
-    url: jdbc:${USERNAME}ql://${DB_HOST}/ingresos
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST}/ingresos
     username: ${USERNAME}
     password: ${PASSWORD}
   mail:
@@ -45,12 +50,12 @@ security:
     resource:
       filter-order: 3
   signing-key: ${SIGNIN_KEY}
-  encoding-strength: 256
+  encoding-strength: ${ENCODING_STRENGTH}
   security-realm: Spring Boot JWT
   jwt:
     client-id: ingresoVisitantes
-    client-secret: ${PASSWORD_MAIL}${CLIENT_SECRET}
-    grant-type: password
+    client-secret: ${CLIENT_SECRET}
+    grant-type: ${GRANT_TYPE}
     scope-read: read
     scope-write: write
     resource-ids: ${RESOURCE_ID}
